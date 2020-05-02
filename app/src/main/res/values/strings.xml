@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CrossfitOnly</string>
+    <string name="enter">Trage Deine Workouts hier ein</string>
+    <string name="title_activity_train">TrainActivity</string>
+</resources>

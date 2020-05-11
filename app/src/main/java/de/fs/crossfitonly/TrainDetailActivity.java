@@ -3,18 +3,14 @@ package de.fs.crossfitonly;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -23,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class TrainActivity extends AppCompatActivity {
+public class TrainDetailActivity extends AppCompatActivity {
     private FloatingActionButton fab;
 
     private static final String TAG = "ListDataActivity";
@@ -54,7 +50,7 @@ public class TrainActivity extends AppCompatActivity {
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
         //get the data and append to a list
-        Cursor data = mDatabaseHelper.getData();
+        Cursor data = mDatabaseHelper.getDataDetail();
         ArrayList<String> listData = new ArrayList<>();
         while(data.moveToNext()){
             //get the value from the database in column 1
@@ -72,14 +68,14 @@ public class TrainActivity extends AppCompatActivity {
                 String name = adapterView.getItemAtPosition(i).toString();
                 Log.d(TAG, "onItemClick: You Clicked on " + name);
 
-                Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
+                Cursor data = mDatabaseHelper.getItemDetailID(name); //get the id associated with that name
                 int itemID = -1;
                 while(data.moveToNext()){
                     itemID = data.getInt(0);
                 }
                 if(itemID > -1){
                     Log.d(TAG, "onItemClick: The ID is: " + itemID);
-                    Intent editScreenIntent = new Intent(TrainActivity.this, TrainDetailActivity.class);
+                    Intent editScreenIntent = new Intent(TrainDetailActivity.this, TrainSetActivity.class);
                     editScreenIntent.putExtra("id",itemID);
                     startActivity(editScreenIntent);
                 }
@@ -95,7 +91,7 @@ public class TrainActivity extends AppCompatActivity {
                 final String name = arg0.getItemAtPosition(pos).toString();
                 Log.d(TAG, "onItemClick: You Clicked on " + name);
 
-                Cursor data = mDatabaseHelper.getItemID(name); //get the id associated with that name
+                Cursor data = mDatabaseHelper.getItemDetailID(name); //get the id associated with that name
                 int itemID = -1;
                 while(data.moveToNext()){
                     itemID = data.getInt(0);
@@ -107,7 +103,7 @@ public class TrainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    mDatabaseHelper.deleteName(finalItemID,name);
+                                    mDatabaseHelper.deleteNameDetail(finalItemID,name);
                                     finish();
                                     overridePendingTransition(0, 0);
                                     startActivity(getIntent());
@@ -147,7 +143,7 @@ public class TrainActivity extends AppCompatActivity {
 
 
     private void insert(){
-        Intent intent = new Intent(this, InsertWorkoutActivity.class);
+        Intent intent = new Intent(this, InsertExerciseActivity.class);
         startActivity(intent);
     }
 }

@@ -11,6 +11,7 @@ public class StartActivity extends AppCompatActivity {
 
     private Button button_crossfit;
     private Button button_train;
+    private  Button button_log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class StartActivity extends AppCompatActivity {
 
         button_crossfit = findViewById(R.id.button_crossfit);
         button_train = findViewById(R.id.button_workout);
+        button_log = findViewById(R.id.button_log);
 
         button_train.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +36,14 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+        button_log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLog();
+            }
+        });
+
+
 
     }
 
@@ -44,6 +54,10 @@ public class StartActivity extends AppCompatActivity {
 
     private void openTrain() {
         Intent intent = new Intent(this, TrainActivity.class);
+        startActivity(intent);
+    }
+    private void openLog(){
+        Intent intent = new Intent(this, LogActivity.class);
         startActivity(intent);
     }
 }

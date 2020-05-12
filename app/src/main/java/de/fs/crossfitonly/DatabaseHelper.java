@@ -22,11 +22,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME2 = "exercise_table";
     private static final String DCOL1 = "ID";
     private static final String DCOL2 = "exercise";
-    private static final
+    private static final String DCOL3 = "workoutID";
 
     private static final String TABLE_NAME3 = "set_table";
     private static final String SCOL1 = "ID";
     private static final String SCOL2 = "sets";
+    private static final String SCOL3 = "exerciseID";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -34,9 +35,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL2 + " TEXT)";
-        String createTable2 = "CREATE TABLE " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DCOL2 + " TEXT)";
-        String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + SCOL2 + " TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL2+" TEXT)";
+        String createTable2 = "CREATE TABLE " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DCOL2 +  "TEXT, "+DCOL3+" INT)";
+        String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + SCOL2 + " TEXT, "+SCOL3+" INT)";
         db.execSQL(createTable3);
         db.execSQL(createTable2);
         db.execSQL(createTable);
@@ -122,17 +123,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public Cursor getDataDetail() {
+    public Cursor getDataDetail(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME2;
+        String query = "SELECT * FROM " + TABLE_NAME2+ " WHERE workoutID = "+id;
+        Log.d(TAG, query);
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
-    public boolean addDataDetail(String item) {
+    public boolean addDataDetail(String item, String item2) {
         SQLiteDatabase db = this.getWritableDatabase();
+        item2="1";
         ContentValues contentValues = new ContentValues();
         contentValues.put(DCOL2, item);
+        contentValues.put(DCOL3, item2);
 
         Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME2);
 
@@ -171,10 +175,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public boolean addDataSet(String item) {
+    public boolean addDataSet(String item, String item2) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SCOL2, item);
+        contentValues.put(SCOL3, item2);
 
         Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME3);
 

@@ -28,8 +28,9 @@ public class InsertExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newEntry = editText.getText().toString();
+                String id = getIntent().getStringExtra("id");
                 if (editText.length() != 0) {
-                    AddData(newEntry);
+                    AddData(newEntry, id);
                     editText.setText("");
 
                     back();
@@ -43,8 +44,8 @@ public class InsertExerciseActivity extends AppCompatActivity {
 
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addDataDetail(newEntry);
+    public void AddData(String newEntry, String id) {
+        boolean insertData = mDatabaseHelper.addDataDetail(newEntry, id);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

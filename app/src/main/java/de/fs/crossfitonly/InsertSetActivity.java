@@ -50,7 +50,7 @@ public class InsertSetActivity extends AppCompatActivity {
     }
 
     public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addDataSet(newEntry);
+        boolean insertData = mDatabaseHelper.addDataSet(newEntry, null);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

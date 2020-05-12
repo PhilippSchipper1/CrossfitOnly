@@ -38,7 +38,7 @@ public class InsertSetActivity extends AppCompatActivity {
                     AddData(newEntry);
                     editText.setText("");
 
-                    back();
+                    finish();
 
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -61,10 +61,5 @@ public class InsertSetActivity extends AppCompatActivity {
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
-    private void back(){
-        Intent intent = new Intent(this, TrainSetActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

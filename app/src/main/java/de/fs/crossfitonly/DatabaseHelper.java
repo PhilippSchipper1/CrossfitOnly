@@ -36,7 +36,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL2+" TEXT)";
-        String createTable2 = "CREATE TABLE " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DCOL2 +  "TEXT, "+DCOL3+" INT)";
+        String createTable2 = "CREATE TABLE " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DCOL2 +  " TEXT, "+DCOL3+" INT)";
+        Log.d(TAG, createTable2);
         String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + SCOL2 + " TEXT, "+SCOL3+" INT)";
         db.execSQL(createTable3);
         db.execSQL(createTable2);
@@ -133,12 +134,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean addDataDetail(String item, String item2) {
         SQLiteDatabase db = this.getWritableDatabase();
-        item2="1";
         ContentValues contentValues = new ContentValues();
         contentValues.put(DCOL2, item);
         contentValues.put(DCOL3, item2);
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME2);
+        Log.d(TAG, "addData: Adding " + item+ item2 + " to " + TABLE_NAME2);
 
         long result = db.insert(TABLE_NAME2, null, contentValues);
 

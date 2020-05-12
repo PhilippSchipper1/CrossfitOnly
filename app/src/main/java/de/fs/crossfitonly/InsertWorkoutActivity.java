@@ -32,7 +32,7 @@ public class InsertWorkoutActivity extends AppCompatActivity {
                     AddData(newEntry);
                     editText.setText("");
 
-                    back();
+                    finish();
 
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -55,10 +55,5 @@ public class InsertWorkoutActivity extends AppCompatActivity {
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
-    private void back(){
-        Intent intent = new Intent(this, TrainActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

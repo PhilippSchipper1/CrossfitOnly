@@ -28,12 +28,14 @@ public class InsertExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newEntry = editText.getText().toString();
-                String id = getIntent().getStringExtra("id");
+
+                int id = getIntent().getIntExtra("id", -1);
+                String id_neu = Integer.toString(id);
                 if (editText.length() != 0) {
-                    AddData(newEntry, id);
+                    AddData(newEntry, id_neu);
                     editText.setText("");
 
-                    back();
+                    finish();
 
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -56,10 +58,5 @@ public class InsertExerciseActivity extends AppCompatActivity {
 
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
-    }
-    private void back(){
-        Intent intent = new Intent(this, TrainDetailActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

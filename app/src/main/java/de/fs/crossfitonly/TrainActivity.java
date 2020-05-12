@@ -1,5 +1,6 @@
 package de.fs.crossfitonly;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 public class TrainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
+    private ArrayAdapter adapter;
 
     private static final String TAG = "ListDataActivity";
 
@@ -45,7 +47,7 @@ public class TrainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insert();
+                insert(getIntent().getIntExtra("id", -1));
             }
         });
     }
@@ -62,7 +64,7 @@ public class TrainActivity extends AppCompatActivity {
             listData.add(data.getString(1));
         }
         //create the list adapter and set the adapter
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);
 
         //set an onItemClickListener to the ListView
@@ -146,8 +148,15 @@ public class TrainActivity extends AppCompatActivity {
     }
 
 
-    private void insert(){
+    private void insert(int id){
         Intent intent = new Intent(this, InsertWorkoutActivity.class);
-        startActivity(intent);
+        intent.putExtra("id", id);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1) adapter.notifyDataSetChanged();
     }
 }

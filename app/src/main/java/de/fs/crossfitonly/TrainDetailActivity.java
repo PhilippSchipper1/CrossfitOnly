@@ -42,7 +42,7 @@ public class TrainDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insert();
+                insert(getIntent().getIntExtra("id", -1));
             }
         });
     }
@@ -52,6 +52,7 @@ public class TrainDetailActivity extends AppCompatActivity {
 
         //get the data and append to a list
         int id = getIntent().getIntExtra("id", 0);
+        Log.d(TAG, Integer.toString(id));
         String id_neu= Integer.toString(id);
         Cursor data = mDatabaseHelper.getDataDetail(id_neu);
         ArrayList<String> listData = new ArrayList<>();
@@ -144,8 +145,9 @@ public class TrainDetailActivity extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
-    private void insert(){
+    private void insert(int id){
         Intent intent = new Intent(this, InsertExerciseActivity.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 }

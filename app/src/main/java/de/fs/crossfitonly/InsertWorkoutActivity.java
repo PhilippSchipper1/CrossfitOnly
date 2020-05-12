@@ -59,5 +59,6 @@ public class InsertWorkoutActivity extends AppCompatActivity {
     private void back(){
         Intent intent = new Intent(this, TrainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

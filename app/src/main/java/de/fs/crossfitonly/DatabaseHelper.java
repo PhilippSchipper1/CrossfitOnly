@@ -22,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME2 = "exercise_table";
     private static final String DCOL1 = "ID";
     private static final String DCOL2 = "exercise";
+    private static final
 
     private static final String TABLE_NAME3 = "set_table";
     private static final String SCOL1 = "ID";

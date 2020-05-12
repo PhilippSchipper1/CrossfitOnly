@@ -9,23 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InsertSetActivity"></activity>
+        <activity android:name=".InsertSetActivity"
+            android:label="@string/insert_set"/>
         <activity android:name=".TrainSetEditActivity" />
-        <activity android:name=".TrainSetActivity" />
-        <activity android:name=".InsertExerciseActivity" />
-        <activity android:name=".TrainDetailActivity" />
-        <activity android:name=".InsertWorkoutActivity" />
+        <activity android:name=".TrainSetActivity"
+            android:label="@string/workouts_sets"/>
+        <activity android:name=".InsertExerciseActivity"
+            android:label="@string/insert_exercise"/>
+        <activity android:name=".TrainDetailActivity"
+            android:label="@string/workouts_detail"/>
+        <activity android:name=".InsertWorkoutActivity"
+            android:label="@string/insert_workout"/>
         <activity android:name=".LogActivity" />
-        <activity android:name=".TrainActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".TrainActivity"
+            android:label="@string/workouts"/>
+        <activity android:name=".StartActivity"
+            android:label="@string/start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".DetailActivity"
+            android:label="@string/crossfit_detail"/>
+        <activity android:name=".MainActivity"
+            android:label="@string/crossfit"/>
     </application>
 
 </manifest>

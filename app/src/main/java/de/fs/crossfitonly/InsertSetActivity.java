@@ -14,21 +14,27 @@ public class InsertSetActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private Button btnAdd;
-    private EditText editText;
+    private EditText editText, editText2, editText3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert_workout);
-        editText = (EditText) findViewById(R.id.insert);
+        setContentView(R.layout.activity_insert_set);
+        editText = (EditText) findViewById(R.id.set);
+        editText2 = (EditText) findViewById(R.id.wdh);
+        editText3 = (EditText) findViewById(R.id.weight);
         btnAdd = (Button) findViewById(R.id.btnAdd);
+
         mDatabaseHelper = new DatabaseHelper(this);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newEntry = editText.getText().toString();
-                if (editText.length() != 0) {
+                String newEntry2 = editText2.getText().toString();
+                String newEntry3= editText3.getText().toString();
+
+                if (editText.length() != 0 ) {
                     AddData(newEntry);
                     editText.setText("");
 
@@ -57,7 +63,8 @@ public class InsertSetActivity extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
     private void back(){
-        Intent intent = new Intent(this, TrainDetailActivity.class);
+        Intent intent = new Intent(this, TrainSetActivity.class);
         startActivity(intent);
+        finish();
     }
 }

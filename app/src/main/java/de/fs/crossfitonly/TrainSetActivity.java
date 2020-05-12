@@ -145,5 +145,6 @@ public class TrainSetActivity extends AppCompatActivity {
     private void insert(){
         Intent intent = new Intent(this, InsertSetActivity.class);
         startActivity(intent);
+
     }
 }

@@ -141,7 +141,6 @@ public class TrainDetailActivity extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 
-
     private void insert(){
         Intent intent = new Intent(this, InsertExerciseActivity.class);
         startActivity(intent);

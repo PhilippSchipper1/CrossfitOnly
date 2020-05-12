@@ -1,6 +1,25 @@
 <resources>
     <string name="app_name">CrossfitOnly</string>
+    <string name="start">Start</string>
+    <string name="crossfit">Crossfit List</string>
+    <string name="crossfit_detail">Detailed Excercise</string>
+    <string name="workouts">Workouts</string>
+    <string name="workouts_detail">Excercises</string>
+    <string name="workouts_sets">Sets</string>
+    <string name="insert_workout">Add new workout</string>
+    <string name="insert_exercise">Add new exercise</string>
+    <string name="insert_set">Add new set</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete">"Are you sure you want to delete this?"</string>
+
+
     <string name="enter">Enter Workout</string>
     <string name="title_activity_train">TrainActivity</string>
     <string name="btnsave">Add</string>
+    <string name="wdh">Enter repetitions</string>
+    <string name="sets">Enter numer od sets</string>
+    <string name="weight">Enter weight</string>
+    <string name="enter_detail">Enter exercise</string>
 </resources>

@@ -57,7 +57,8 @@ public class InsertExerciseActivity extends AppCompatActivity {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
     private void back(){
-        Intent intent = new Intent(this, TrainSetActivity.class);
+        Intent intent = new Intent(this, TrainDetailActivity.class);
         startActivity(intent);
+        finish();
     }
 }

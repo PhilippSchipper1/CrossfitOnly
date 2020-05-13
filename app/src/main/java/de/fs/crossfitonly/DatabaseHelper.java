@@ -28,6 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String SCOL1 = "ID";
     private static final String SCOL2 = "sets";
     private static final String SCOL3 = "exerciseID";
+    private static final String SCOL4 = "reps";
+    private static final String SCOL5 = "weight";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -37,9 +39,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL2+" TEXT)";
         String createTable2 = "CREATE TABLE " + TABLE_NAME2 +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DCOL2 +  " TEXT, "+DCOL3+" INT)";
-        Log.d(TAG, createTable2);
-        String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + SCOL2 + " TEXT, "+SCOL3+" INT)";
+        String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + SCOL2 + " TEXT, "+SCOL3+" INT, "+SCOL4
+                +" TEXT, "+SCOL5+" TEXT)";
         db.execSQL(createTable3);
+        Log.d(TAG, createTable3);
         db.execSQL(createTable2);
         db.execSQL(createTable);
 
@@ -150,9 +153,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getDataSet() {
+    public Cursor getDataSet(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME3;
+        String query = "SELECT * FROM " + TABLE_NAME2+ " WHERE exerciseID = "+id;
         Cursor data = db.rawQuery(query, null);
         return data;
     }

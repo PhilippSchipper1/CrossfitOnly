@@ -1,5 +1,6 @@
 package de.fs.crossfitonly;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -26,6 +27,10 @@ public class TrainSetActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
 
+    private int id;
+
+    private ArrayAdapter<String> adapter;
+
     private ListView mListView;
 
     @Override
@@ -34,6 +39,8 @@ public class TrainSetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_train);
         mListView = (ListView) findViewById(R.id.lv_train);
         mDatabaseHelper = new DatabaseHelper(this);
+
+        id = getIntent().getIntExtra("id",-1);
 
         populateListView();
         fab= findViewById(R.id.flot);
@@ -50,7 +57,7 @@ public class TrainSetActivity extends AppCompatActivity {
         Log.d(TAG, "populateListView: Displaying data in the ListView.");
 
         //get the data and append to a list
-        Cursor data = mDatabaseHelper.getDataSet();
+        Cursor data = mDatabaseHelper.getDataSet(Integer.toString(id));
         ArrayList<String> listData = new ArrayList<>();
         while(data.moveToNext()){
             //get the value from the database in column 1
@@ -58,7 +65,7 @@ public class TrainSetActivity extends AppCompatActivity {
             listData.add(data.getString(1));
         }
         //create the list adapter and set the adapter
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
+        adapter = new ArrayAdapter<String>(this, R.layout.lv_complex_item, listData);
         mListView.setAdapter(adapter);
 
         //set an onItemClickListener to the ListView
@@ -146,5 +153,20 @@ public class TrainSetActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InsertSetActivity.class);
         startActivity(intent);
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+
+            for (int i = 0; i < adapter.getCount(); i++) {
+                adapter.remove(adapter.getItem(i));
+            }
+            Cursor cursor = mDatabaseHelper.getDataSet(Integer.toString(id));
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                adapter.add(cursor.getString(1));
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 }

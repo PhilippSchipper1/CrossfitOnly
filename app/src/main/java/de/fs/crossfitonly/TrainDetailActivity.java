@@ -1,5 +1,6 @@
 package de.fs.crossfitonly;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -28,6 +29,8 @@ public class TrainDetailActivity extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
 
     private ListView mListView;
+    private ArrayAdapter<String> adapter;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class TrainDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_train);
         mListView = (ListView) findViewById(R.id.lv_train);
         mDatabaseHelper = new DatabaseHelper(this);
+        id= getIntent().getIntExtra("id",-1);
 
         populateListView();
         fab= findViewById(R.id.flot);
@@ -62,7 +66,7 @@ public class TrainDetailActivity extends AppCompatActivity {
             listData.add(data.getString(1));
         }
         //create the list adapter and set the adapter
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listData);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listData);
         mListView.setAdapter(adapter);
 
         //set an onItemClickListener to the ListView
@@ -148,6 +152,22 @@ public class TrainDetailActivity extends AppCompatActivity {
     private void insert(int id){
         Intent intent = new Intent(this, InsertExerciseActivity.class);
         intent.putExtra("id", id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+
+            for (int i = 0; i < adapter.getCount(); i++) {
+                adapter.remove(adapter.getItem(i));
+            }
+            Cursor cursor = mDatabaseHelper.getDataDetail(Integer.toString(id));
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                adapter.add(cursor.getString(1));
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 }

@@ -29,7 +29,7 @@ public class TrainSetActivity extends AppCompatActivity {
 
     private int id;
 
-    private ArrayAdapter<String> adapter;
+    private AdapterHelper adapter;
 
     private ListView mListView;
 
@@ -58,14 +58,15 @@ public class TrainSetActivity extends AppCompatActivity {
 
         //get the data and append to a list
         Cursor data = mDatabaseHelper.getDataSet(Integer.toString(id));
-        ArrayList<String> listData = new ArrayList<>();
+        ArrayList<Sets> listData = new ArrayList<>();
         while(data.moveToNext()){
             //get the value from the database in column 1
             //then add it to the ArrayList
-            listData.add(data.getString(1));
+            Sets set = new Sets(data.getString(1), data.getString(3), data.getString(4));
+            listData.add(set);
         }
         //create the list adapter and set the adapter
-        adapter = new ArrayAdapter<String>(this, R.layout.lv_complex_item, listData);
+        adapter = new AdapterHelper(this, R.layout.lv_complex_item, listData);
         mListView.setAdapter(adapter);
 
         //set an onItemClickListener to the ListView
@@ -159,12 +160,16 @@ public class TrainSetActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
 
-            for (int i = 0; i < adapter.getCount(); i++) {
-                adapter.remove(adapter.getItem(i));
+            while (adapter.getCount()>0){
+                adapter.remove(adapter.getItem(0));
             }
+
             Cursor cursor = mDatabaseHelper.getDataSet(Integer.toString(id));
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                adapter.add(cursor.getString(1));
+                Sets set = new Sets(cursor.getString(1), cursor.getString(3), cursor.getString(4));
+                adapter.add(set);
+
+                Log.d(TAG, "TEST:"+ set);
             }
             adapter.notifyDataSetChanged();
         }

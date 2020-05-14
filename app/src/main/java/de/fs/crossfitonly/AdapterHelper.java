@@ -2,6 +2,7 @@ package de.fs.crossfitonly;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class AdapterHelper extends ArrayAdapter<Sets>{
     private static class ViewHolder {
@@ -43,6 +46,8 @@ public class AdapterHelper extends ArrayAdapter<Sets>{
             viewHolder.sets.setText(item.getSets());
             viewHolder.reps.setText(item.getReps());
             viewHolder.weight.setText(item.getWeight());
+
+            Log.d(TAG,"TEST:"+item.getReps()+item.getSets() + item.getReps());
         }
 
         return convertView;

@@ -162,9 +162,10 @@ public class TrainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1) {
 
-            for(int i=0; i<adapter.getCount(); i++){
-                adapter.remove(adapter.getItem(i));
+            while (adapter.getCount()>0){
+                adapter.remove(adapter.getItem(0));
             }
+
             Cursor cursor = mDatabaseHelper.getData();
             for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 adapter.add(cursor.getString(1));

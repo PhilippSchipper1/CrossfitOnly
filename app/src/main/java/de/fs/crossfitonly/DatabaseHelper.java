@@ -155,7 +155,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getDataSet(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME2+ " WHERE exerciseID = "+id;
+        String query = "SELECT * FROM " + TABLE_NAME3+ " WHERE exerciseID = "+id;
+        Log.d(TAG, "TEST:"+query);
         Cursor data = db.rawQuery(query, null);
         return data;
     }

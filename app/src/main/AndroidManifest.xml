@@ -9,12 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
-            android:name=".BodyActivity" />
-
-
+            android:name=".PlankActivity"
+            android:label="@string/plank_timer"
+            />
+        <activity
+            android:name=".BodyActivity"
+            android:label="@string/bmi" />
         <activity
             android:name=".InsertSetActivity"
             android:label="@string/insert_set" />

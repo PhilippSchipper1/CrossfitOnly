@@ -10,6 +10,7 @@
     <string name="insert_exercise">Add new exercise</string>
     <string name="insert_set">Add new set</string>
     <string name="bmi_calc">BMI calculator</string>
+    <string name="plank_timer">Plank timer</string>
 
     <string name="bmi">BMI</string>
     <string name="crsfit">Crossfit</string>
@@ -29,8 +30,8 @@
     <string name="weight">Enter weight</string>
     <string name="enter_detail">Enter exercise</string>
     <string name="calculateBMI_text_bmi">Calculate</string>
-    <string name="height_text_bmi">Height</string>
-    <string name="weight_text_bmi">Weight</string>
+    <string name="height_text_bmi">Height (in cm)</string>
+    <string name="weight_text_bmi">Weight (in kg)</string>
     <string name="calculateBMI">Calculate</string>
     <string name="very_severely_underweight">Very severly underweight</string>
     <string name="severely_underweight">Severly underweight</string>
@@ -40,4 +41,9 @@
     <string name="obese_class_i">overweight</string>
     <string name="obese_class_ii">severly overweight</string>
     <string name="obese_class_iii">very severly overweight</string>
+    <string name="minutes">Minutes</string>
+    <string name="set_timer">Set</string>
+    <string name="start_timer">00:00</string>
+    <string name="start_button">start</string>
+    <string name="reset_button">reset</string>
 </resources>

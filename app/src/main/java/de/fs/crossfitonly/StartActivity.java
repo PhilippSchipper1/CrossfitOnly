@@ -11,7 +11,8 @@ public class StartActivity extends AppCompatActivity {
 
     private Button button_crossfit;
     private Button button_train;
-    private  Button button_log;
+    private  Button button_bmi;
+    private Button button_plank;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,8 @@ public class StartActivity extends AppCompatActivity {
 
         button_crossfit = findViewById(R.id.button_crossfit);
         button_train = findViewById(R.id.button_workout);
-        button_log = findViewById(R.id.button_bmi);
+        button_bmi = findViewById(R.id.button_bmi);
+        button_plank = findViewById(R.id.button_plank);
 
         button_train.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,12 +38,23 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        button_log.setOnClickListener(new View.OnClickListener() {
+        button_bmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLog();
+                openBMI();
             }
         });
+
+        button_plank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPlank();
+            }
+        });
+
+
+
+
 
 
 
@@ -56,8 +69,12 @@ public class StartActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TrainActivity.class);
         startActivity(intent);
     }
-    private void openLog(){
+    private void openBMI(){
         Intent intent = new Intent(this, BodyActivity.class);
+        startActivity(intent);
+    }
+    private void openPlank(){
+        Intent intent = new Intent(this, PlankActivity.class);
         startActivity(intent);
     }
 }

@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
 
         button_crossfit = findViewById(R.id.button_crossfit);
         button_train = findViewById(R.id.button_workout);
-        button_log = findViewById(R.id.button_log);
+        button_log = findViewById(R.id.button_bmi);
 
         button_train.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +57,7 @@ public class StartActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void openLog(){
-        Intent intent = new Intent(this, LogActivity.class);
+        Intent intent = new Intent(this, BodyActivity.class);
         startActivity(intent);
     }
 }

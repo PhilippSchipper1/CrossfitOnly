@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import de.fs.crossfitonly.R;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,7 +37,7 @@ public class TrainSetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_train);
+        setContentView(R.layout.activity_train_sets);
         mListView = (ListView) findViewById(R.id.lv_train);
         mDatabaseHelper = new DatabaseHelper(this);
 
@@ -48,7 +49,7 @@ public class TrainSetActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insert();
+                insert(getIntent().getIntExtra("id", -1));
             }
         });
     }
@@ -69,34 +70,12 @@ public class TrainSetActivity extends AppCompatActivity {
         adapter = new AdapterHelper(this, R.layout.lv_complex_item, listData);
         mListView.setAdapter(adapter);
 
-        //set an onItemClickListener to the ListView
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String name = adapterView.getItemAtPosition(i).toString();
-                Log.d(TAG, "onItemClick: You Clicked on " + name);
-
-                Cursor data = mDatabaseHelper.getItemSetID(name); //get the id associated with that name
-                int itemID = -1;
-                while(data.moveToNext()){
-                    itemID = data.getInt(0);
-                }
-                if(itemID > -1){
-                    Log.d(TAG, "onItemClick: The ID is: " + itemID);
-                    Intent editScreenIntent = new Intent(TrainSetActivity.this, TrainSetEditActivity.class);
-                    editScreenIntent.putExtra("id",itemID);
-                    startActivity(editScreenIntent);
-                }
-                else{
-                    toastMessage("No ID associated with that name");
-                }
-            }
-        });
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
                 final String name = arg0.getItemAtPosition(pos).toString();
+                Log.d(TAG, "TEST:"+ name);
                 Log.d(TAG, "onItemClick: You Clicked on " + name);
 
                 Cursor data = mDatabaseHelper.getItemSetID(name); //get the id associated with that name
@@ -150,8 +129,9 @@ public class TrainSetActivity extends AppCompatActivity {
     }
 
 
-    private void insert(){
+    private void insert(int id){
         Intent intent = new Intent(this, InsertSetActivity.class);
+        intent.putExtra("id", this.id);
         startActivity(intent);
 
     }
@@ -173,5 +153,13 @@ public class TrainSetActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
         }
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CrossfitOnly</string>
+    <string name="start">Start</string>
+    <string name="crossfit">Crossfit Liste</string>
+    <string name="crossfit_detail">Detaillierte Übung</string>
+    <string name="workouts">Workouts</string>
+    <string name="workouts_detail">Übungen</string>
+    <string name="workouts_sets">Sätze</string>
+    <string name="insert_workout">"Neues Workout "</string>
+    <string name="insert_exercise">Neue Übung</string>
+    <string name="insert_set">Neuer Satz</string>
+    <string name="bmi_calc">BMI Rechner</string>
+    <string name="bmi">BMI</string>
+    <string name="crsfit">BMI</string>
+    <string name="workout">Training</string>
+    <string name="yes">Ja</string>
+    <string name="no">nein</string>
+    <string name="delete">Sicher löschen?</string>
+    <string name="enter">Eingeben</string>
+    <string name="title_activity_train">Trainieren</string>
+    <string name="btnsave">Hinzufügen</string>
+    <string name="wdh">"Wdh. "</string>
+    <string name="sets">"Sätze "</string>
+    <string name="weight">Gewicht</string>
+    <string name="enter_detail">Übung</string>
+    <string name="calculateBMI_text_bmi">Berechnen</string>
+    <string name="height_text_bmi">Größe (cm)</string>
+    <string name="weight_text_bmi">Gewicht (kg)</string>
+    <string name="calculateBMI">Berechnen</string>
+    <string name="very_severely_underweight">Sehtr stark untergewichtig</string>
+    <string name="severely_underweight">Stark Untergewichtig</string>
+    <string name="underweight">Untergewichtig</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Übergewichtig</string>
+    <string name="obese_class_i">Stark Übergewichtig</string>
+    <string name="obese_class_ii">Sehr stark übergewichtig</string>
+    <string name="obese_class_iii">Adipös</string>
+    <string name="minutes">Minuten</string>
+    <string name="set_timer">Stellen</string>
+    <string name="start_button">Start</string>
+    <string name="reset_button">Zurücksetzen</string>
+</resources>

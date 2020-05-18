@@ -35,7 +35,9 @@ public class InsertSetActivity extends AppCompatActivity {
                 String newEntry3= editText3.getText().toString();
 
                 if (editText.length() != 0 ) {
-                    AddData(newEntry);
+                    int id = getIntent().getIntExtra("id", -1);
+                    String id_neu = Integer.toString(id);
+                    AddData(newEntry,id_neu,newEntry2,newEntry3);
                     editText.setText("");
 
                     finish();
@@ -49,8 +51,8 @@ public class InsertSetActivity extends AppCompatActivity {
 
     }
 
-    public void AddData(String newEntry) {
-        boolean insertData = mDatabaseHelper.addDataSet(newEntry, null);
+    public void AddData(String newEntry,String id,String newEntry2,String newEntry3) {
+        boolean insertData = mDatabaseHelper.addDataSet(newEntry,id,newEntry2,newEntry3);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

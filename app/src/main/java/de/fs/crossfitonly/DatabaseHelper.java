@@ -179,11 +179,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public boolean addDataSet(String item, String item2) {
+    public boolean addDataSet(String item, String item2,String item3,String item4) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(SCOL2, item);
         contentValues.put(SCOL3, item2);
+        contentValues.put(SCOL4, item3);
+        contentValues.put(SCOL5, item4);
 
         Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME3);
 

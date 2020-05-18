@@ -90,6 +90,7 @@ public class PlankActivity extends AppCompatActivity {
             public void onFinish() {
                 TimerRunning = false;
                 updateWatchInterface();
+
             }
         }.start();
         TimerRunning = true;
@@ -146,6 +147,44 @@ public class PlankActivity extends AppCompatActivity {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+    private void updateButtons() {
+        if (TimerRunning) {
+            ButtonReset.setVisibility(View.INVISIBLE);
+            ButtonStartPause.setText("Pause");
+        } else {
+            ButtonStartPause.setText("Start");
+            if (TimeLeftInMillis < 1000) {
+                ButtonStartPause.setVisibility(View.INVISIBLE);
+            } else {
+                ButtonStartPause.setVisibility(View.VISIBLE);
+            }
+            if (TimeLeftInMillis < StartTimeInMillis) {
+                ButtonReset.setVisibility(View.VISIBLE);
+            } else {
+                ButtonReset.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("millisLeft", TimeLeftInMillis);
+        outState.putBoolean("timerRunning", TimerRunning);
+        outState.putLong("endTime", EndTime);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        TimeLeftInMillis = savedInstanceState.getLong("millisLeft");
+        TimerRunning = savedInstanceState.getBoolean("timerRunning");
+        updateCountDownText();
+        updateButtons();
+        if (TimerRunning) {
+            EndTime = savedInstanceState.getLong("endTime");
+            TimeLeftInMillis = EndTime - System.currentTimeMillis();
+            startTimer();
         }
     }
 }

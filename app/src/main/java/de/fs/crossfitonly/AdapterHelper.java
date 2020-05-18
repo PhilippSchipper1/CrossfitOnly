@@ -32,8 +32,8 @@ public class AdapterHelper extends ArrayAdapter<Sets>{
 
             viewHolder = new ViewHolder();
             viewHolder.sets = (TextView) convertView.findViewById(R.id.textView);
-            viewHolder.reps = (TextView) convertView.findViewById(R.id.textView2);
-            viewHolder.weight = (TextView) convertView.findViewById(R.id.textView3);
+            viewHolder.reps = (TextView) convertView.findViewById(R.id.textView3);
+            viewHolder.weight = (TextView) convertView.findViewById(R.id.textView2);
 
             convertView.setTag(viewHolder);
         } else {
@@ -42,10 +42,12 @@ public class AdapterHelper extends ArrayAdapter<Sets>{
 
         Sets item = getItem(position);
 
+
         if(item != null) {
-            viewHolder.sets.setText(item.getSets());
-            viewHolder.reps.setText(item.getReps());
-            viewHolder.weight.setText(item.getWeight());
+            viewHolder.sets.setText(item.getSets() +" times");
+            viewHolder.reps.setText(item.getReps()+ " reps");
+            viewHolder.weight.setText(item.getWeight()+" kg");
+
 
             Log.d(TAG,"TEST:"+item.getReps()+item.getSets() + item.getReps());
         }

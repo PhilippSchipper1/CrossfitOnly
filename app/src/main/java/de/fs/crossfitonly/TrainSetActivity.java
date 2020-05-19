@@ -63,7 +63,7 @@ public class TrainSetActivity extends AppCompatActivity {
         while(data.moveToNext()){
             //get the value from the database in column 1
             //then add it to the ArrayList
-            Sets set = new Sets(data.getString(1), data.getString(3), data.getString(4));
+            Sets set = new Sets(data.getString(0),data.getString(1), data.getString(3), data.getString(4));
             listData.add(set);
         }
         //create the list adapter and set the adapter
@@ -74,27 +74,20 @@ public class TrainSetActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
+                final Sets set = (Sets) arg0.getItemAtPosition(pos);
+
                 final String name = arg0.getItemAtPosition(pos).toString();
-                Log.d(TAG, "TEST:"+ name);
+                Log.d(TAG, "TEST:"+ set.getSets());
                 Log.d(TAG, "onItemClick: You Clicked on " + name);
 
-                Cursor data = mDatabaseHelper.getItemSetID(name); //get the id associated with that name
-                int itemID = -1;
-                while(data.moveToNext()){
-                    itemID = data.getInt(0);
-                }
-                if(itemID > -1){
-                    final int finalItemID = itemID;
+
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    mDatabaseHelper.deleteNameSet(finalItemID,name);
-                                    finish();
-                                    overridePendingTransition(0, 0);
-                                    startActivity(getIntent());
-                                    overridePendingTransition(0, 0);
+                                    mDatabaseHelper.deleteIDSet(set.getId());
+                                    change();
                                     toastMessage("removed from database");
                                     break;
 
@@ -108,12 +101,6 @@ public class TrainSetActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mListView.getContext());
                     builder.setMessage("Are you sure you want to delete this?").setPositiveButton("Yes", dialogClickListener)
                             .setNegativeButton("No", dialogClickListener).show();
-
-                }
-                else{
-                    toastMessage("No ID associated with that name");
-                }
-                Log.v("long clicked","pos: " + pos);
 
                 return true;
             }
@@ -132,7 +119,7 @@ public class TrainSetActivity extends AppCompatActivity {
     private void insert(int id){
         Intent intent = new Intent(this, InsertSetActivity.class);
         intent.putExtra("id", this.id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
 
     }
     @Override
@@ -146,7 +133,7 @@ public class TrainSetActivity extends AppCompatActivity {
 
             Cursor cursor = mDatabaseHelper.getDataSet(Integer.toString(id));
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                Sets set = new Sets(cursor.getString(1), cursor.getString(3), cursor.getString(4));
+                Sets set = new Sets(cursor.getString(0),cursor.getString(1), cursor.getString(3), cursor.getString(4));
                 adapter.add(set);
 
                 Log.d(TAG, "TEST:"+ set);
@@ -154,12 +141,25 @@ public class TrainSetActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         }
     }
-    @Override
+   /* @Override
     protected void onRestart() {
         super.onRestart();
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
-        overridePendingTransition(0, 0);
+    }*/
+    private void change(){
+        while (adapter.getCount()>0){
+            adapter.remove(adapter.getItem(0));
+        }
+
+        Cursor cursor = mDatabaseHelper.getDataSet(Integer.toString(id));
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            Sets set = new Sets(cursor.getString(0),cursor.getString(1), cursor.getString(3), cursor.getString(4));
+            adapter.add(set);
+
+            Log.d(TAG, "TEST:"+ set);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

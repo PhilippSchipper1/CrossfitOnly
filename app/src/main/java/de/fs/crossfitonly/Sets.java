@@ -1,15 +1,30 @@
 package de.fs.crossfitonly;
 
+import android.util.Log;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class Sets {
 
     private String sets;
     private String reps;
     private String weight;
+    private String id;
 
-    public Sets(String sets, String reps, String weight) {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Sets( String id, String sets, String reps, String weight) {
         this.sets = sets;
         this.reps = reps;
         this.weight = weight;
+        this.id = id;
+        Log.d(TAG,"IDD:"+ id);
     }
 
     public String getSets() {

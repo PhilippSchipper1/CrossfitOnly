@@ -169,14 +169,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public void deleteNameSet(int id, String name) {
+    public void deleteIDSet(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME3 + " WHERE "
-                + SCOL1 + " = '" + id + "'" +
-                " AND " + SCOL2 + " = '" + name + "'";
+                + SCOL1 + " = '" + id + "'";
         Log.d(TAG, "deleteName: query: " + query);
-        Log.d(TAG, "deleteName: Deleting " + name + " from database.");
         db.execSQL(query);
+
     }
 
     public boolean addDataSet(String item, String item2,String item3,String item4) {

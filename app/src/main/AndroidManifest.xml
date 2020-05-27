@@ -48,10 +48,10 @@
             android:label="@string/start">
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".CrossfitDetailActivity"
             android:label="@string/crossfit_detail" />
         <activity
-            android:name=".MainActivity"
+            android:name=".CrossfitActivity"
             android:label="@string/crossfit" />
     </application>
 

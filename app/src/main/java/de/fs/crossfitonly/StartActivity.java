@@ -74,7 +74,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void openCrossfit() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CrossfitActivity.class);
         startActivity(intent);
     }
 

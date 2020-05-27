@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class DetailActivity extends AppCompatActivity {
+public class CrossfitDetailActivity extends AppCompatActivity {
 
     private TextView title;
     private TextView wod;

@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class CrossfitActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView lv;
     private ArrayList<Workout> wodList;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
 
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, CrossfitDetailActivity.class);
         String title = wodList.get(pos).getTitle();
         String wod = wodList.get(pos).getWod();
 

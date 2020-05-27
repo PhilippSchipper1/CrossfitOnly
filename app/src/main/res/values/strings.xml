@@ -26,7 +26,7 @@
     <string name="title_activity_train">TrainActivity</string>
     <string name="btnsave">Add</string>
     <string name="wdh">Enter repetitions</string>
-    <string name="sets">Enter numer od sets</string>
+    <string name="sets">Enter numer of sets</string>
     <string name="weight">Enter weight</string>
     <string name="enter_detail">Enter exercise</string>
     <string name="calculateBMI_text_bmi">Calculate</string>
